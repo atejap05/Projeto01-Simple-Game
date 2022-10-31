@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="./src/assets/favicon_io/favicon.ico"
+    />
+    <link rel="stylesheet" href="./src/css/styles.css" />
+    <script type="module" defer src="./index.js"></script>
+    <title>Jogo da Velha</title>
+  </head>
+  <body>
+    <main class="main-container">
+      <div class="overlay hidden"><span></span></div>
+      <div class="display">
+        <div class="player player1">
+          <span>X</span>
+          <span>-</span>
+        </div>
+        <div class="player player2">
+          <span>O</span>
+          <span>-</span>
+        </div>
+      </div>
+      <div class="hash">
+        <div class="hash-container">
+          <button class="cell cell0x0"></button>
+          <button class="cell cell0x1"></button>
+          <button class="cell cell0x2"></button>
+          <button class="cell cell1x0"></button>
+          <button class="cell cell1x1"></button>
+          <button class="cell cell1x2"></button>
+          <button class="cell cell2x0"></button>
+          <button class="cell cell2x1"></button>
+          <button class="cell cell2x2"></button>
+        </div>
+      </div>
+      <div class="restart">
+        <button class="btn-restart">Reiniciar</button>
+      </div>
+    </main>
+  </body>
+</html>
