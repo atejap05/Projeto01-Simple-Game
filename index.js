@@ -22,6 +22,12 @@ let matrix = [
 let player1Socore = 0;
 let player2Socore = 0;
 
+const disableClickedCell = allCells => {
+  allCells.forEach(cell => {
+    if (!cell.disabled) cell.disabled = true;
+  });
+};
+
 const clearGrid = () => {
   cells.forEach(cell => {
     // reset cell values
@@ -79,6 +85,8 @@ const switchMarkup = e => {
 
   // game finish
   if (winner) {
+    disableClickedCell(cells);
+
     const position = Object.entries(winnerObj)[0];
     // set background depending of the position
     const bgWinner = new BackgroundWinner(position);
