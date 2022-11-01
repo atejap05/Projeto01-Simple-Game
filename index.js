@@ -80,6 +80,7 @@ const switchMarkup = e => {
     // fill up the matrix
 
     //FIXME: player random tentar jogar apos nao terem mais positions randomPotition = []
+    //FIXME: aplicar disable para a celula marcada randomicamente. Ela esta aceitando clickes
 
     matrix[randPosition[0]].splice(randPosition[1], 1, tags.shift());
     console.log(tags);
