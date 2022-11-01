@@ -1,5 +1,6 @@
 import { CheckWinner } from "./src/js/checkWinner.js";
 import { BackgroundWinner } from "./src/js/bgWinner.js";
+import { RandomPlayer } from "./src/js/dummyPlayer.js";
 
 // Players
 const players = document.querySelectorAll(".player");
@@ -11,16 +12,6 @@ const cells = document.querySelectorAll(".cell");
 const btn = document.querySelector(".btn-restart");
 // Overlay
 const overlay = document.querySelector(".overlay");
-
-let tags = ["x", "o", "x", "o", "x", "o", "x", "o", "x"];
-let matrix = [
-  [null, null, null],
-  [null, null, null],
-  [null, null, null],
-];
-
-let player1Socore = 0;
-let player2Socore = 0;
 
 const disableClickedCell = allCells => {
   allCells.forEach(cell => {
@@ -52,6 +43,16 @@ const clearGrid = () => {
   // remove background winner class
 };
 
+let tags = ["x", "o", "x", "o", "x", "o", "x", "o", "x"];
+let matrix = [
+  [null, null, null],
+  [null, null, null],
+  [null, null, null],
+];
+
+let player1Socore = 0;
+let player2Socore = 0;
+
 const switchMarkup = e => {
   const cell = e.target;
   // TODO: criar funcao getCellPosition
@@ -60,11 +61,34 @@ const switchMarkup = e => {
     .split("x")
     .map(idx => +idx);
 
+  console.log(tags);
   const tag = tags.shift();
 
   // fill up the matrix
   matrix[cellPosition[0]].splice(cellPosition[1], 1, tag);
   cell.innerText = tag === "x" ? "X" : "O";
+
+  const pvcMode = true;
+
+  //TODO: implementar timeout para o player randomico
+  //TODO: implementar a interface de opcoes de escolha entre pvp ou pvc
+
+  if (pvcMode) {
+    const randomPlayer = new RandomPlayer(matrix);
+    const randPosition = randomPlayer.getRandomPosition();
+    console.log(tags);
+    // fill up the matrix
+
+    //FIXME: player random tentar jogar apos nao terem mais positions randomPotition = []
+
+    matrix[randPosition[0]].splice(randPosition[1], 1, tags.shift());
+    console.log(tags);
+
+    const randomCell = document.querySelector(
+      `.cell${randPosition[0]}x${randPosition[1]}`
+    );
+    randomCell.innerText = "O";
+  }
 
   // disable clicked cell
   cell.disabled = true;
@@ -134,7 +158,6 @@ btn.addEventListener("click", () => {
   player2Socore = 0;
 });
 
-// ON LOAD EVENTS
 window.addEventListener("load", () => {
   player1.classList.add("bb-teal");
 });

@@ -49,8 +49,7 @@ html {
 
 .overlay {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 25%;
   transform: translate(-50%, -50%);
 
   background-color: var(--color-light-green);
@@ -248,6 +247,12 @@ html {
   border-radius: var(--small-border-redius);
   border: none;
   cursor: pointer;
+
+  transition: all 0.2s;
+}
+
+.btn-restart:active {
+  transform: scale(0.9);
 }
 
 @media (max-width: 54em) {
