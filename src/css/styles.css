@@ -37,7 +37,7 @@ html {
   position: relative;
 }
 
-@media (max-width: 540px) {
+@media (max-width: 54em) {
   .main-container {
     height: 80vh;
   }
@@ -118,7 +118,7 @@ html {
   margin-right: 2rem;
 }
 
-@media (max-width: 540px) {
+@media (max-width: 54em) {
   .display {
     flex-direction: column;
     gap: 1rem;
@@ -159,7 +159,7 @@ html {
   justify-items: center;
 }
 
-@media (max-width: 540px) {
+@media (max-width: 54em) {
   .hash {
     height: 45%;
   }
@@ -233,7 +233,7 @@ html {
   place-items: center;
 }
 
-@media (max-width: 540px) {
+@media (max-width: 54em) {
   .btn-restart {
     font-size: 1.8rem;
   }
@@ -250,7 +250,7 @@ html {
   cursor: pointer;
 }
 
-@media (max-width: 540px) {
+@media (max-width: 54em) {
   .btn-restart {
     font-size: 1.4rem;
   }
