@@ -73,22 +73,24 @@ const switchMarkup = e => {
   //TODO: implementar timeout para o player randomico
   //TODO: implementar a interface de opcoes de escolha entre pvp ou pvc
 
-  if (pvcMode) {
-    const randomPlayer = new RandomPlayer(matrix);
-    const randPosition = randomPlayer.getRandomPosition();
-    console.log(tags);
+  const randomPlayer = new RandomPlayer(matrix);
+  const randPosition = randomPlayer.getRandomPosition();
+
+  if (pvcMode && randPosition) {
     // fill up the matrix
 
-    //FIXME: player random tentar jogar apos nao terem mais positions randomPotition = []
+    //FIXME: player random tenta jogar apos nao terem mais positions randomPotition = []
     //FIXME: aplicar disable para a celula marcada randomicamente. Ela esta aceitando clickes
 
     matrix[randPosition[0]].splice(randPosition[1], 1, tags.shift());
-    console.log(tags);
+
+    console.table(matrix);
 
     const randomCell = document.querySelector(
       `.cell${randPosition[0]}x${randPosition[1]}`
     );
     randomCell.innerText = "O";
+    randomCell.disabled = true;
   }
 
   // disable clicked cell
