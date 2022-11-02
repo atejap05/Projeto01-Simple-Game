@@ -88,10 +88,68 @@ html {
   }
 }
 
+/* Mode */
+/*Toggle Specific styles*/
+
+.mode {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 2rem;
+  letter-spacing: 0.2rem;
+  font-weight: 600;
+  color: #12b886;
+  flex: 0 0 10%;
+}
+
+.toggle {
+  display: inline-block;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 5.5rem;
+  height: 2.8rem;
+  background-color: var(--color-white);
+  position: relative;
+  border-radius: 3rem;
+  box-shadow: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.toggle::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  width: 2.4rem;
+  height: 2.4rem;
+  top: 0.2rem;
+  left: 0.2rem;
+  background-color: var(--ligth-gray);
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+}
+
+.toggle:hover::after {
+  background-color: var(--dark-gray);
+}
+
+input[type="checkbox"]:checked.toggle {
+  box-shadow: inset 0 0 0 1.5rem var(--color-teal);
+}
+
+input[type="checkbox"]:checked + span {
+  transform: scale(1.15);
+}
+
+input[type="checkbox"]:checked.toggle:after {
+  left: 2.9rem;
+  background-color: var(--color-white);
+}
+
 /* DISPLAY */
 .display {
   width: 100%;
-  flex: 0 0 20%;
+  flex: 0 0 10%;
   color: var(--dark-gray);
   display: flex;
   align-items: center;

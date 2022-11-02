@@ -12,6 +12,8 @@ const cells = document.querySelectorAll(".cell");
 const btn = document.querySelector(".btn-restart");
 // Overlay
 const overlay = document.querySelector(".overlay");
+// Mode
+const pvrMode = document.querySelector(".toggle");
 
 const disableClickedCell = allCells => {
   allCells.forEach(cell => {
@@ -61,36 +63,30 @@ const switchMarkup = e => {
     .split("x")
     .map(idx => +idx);
 
-  console.log(tags);
   const tag = tags.shift();
-
   // fill up the matrix
   matrix[cellPosition[0]].splice(cellPosition[1], 1, tag);
   cell.innerText = tag === "x" ? "X" : "O";
 
-  const pvcMode = true;
-
-  //TODO: implementar timeout para o player randomico
-  //TODO: implementar a interface de opcoes de escolha entre pvp ou pvc
+  const pvrModeIsChecked = pvrMode.checked;
 
   const randomPlayer = new RandomPlayer(matrix);
   const randPosition = randomPlayer.getRandomPosition();
 
-  if (pvcMode && randPosition) {
+  if (pvrModeIsChecked && randPosition) {
     // fill up the matrix
 
-    //FIXME: player random tenta jogar apos nao terem mais positions randomPotition = []
-    //FIXME: aplicar disable para a celula marcada randomicamente. Ela esta aceitando clickes
-
     matrix[randPosition[0]].splice(randPosition[1], 1, tags.shift());
+    player1.classList.toggle("bb-teal");
+    player2.classList.toggle("bb-teal");
 
-    console.table(matrix);
-
-    const randomCell = document.querySelector(
-      `.cell${randPosition[0]}x${randPosition[1]}`
-    );
-    randomCell.innerText = "O";
-    randomCell.disabled = true;
+    setTimeout(() => {
+      const randomCell = document.querySelector(
+        `.cell${randPosition[0]}x${randPosition[1]}`
+      );
+      randomCell.innerText = "O";
+      randomCell.disabled = true;
+    }, 500);
   }
 
   // disable clicked cell
