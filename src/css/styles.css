@@ -149,7 +149,7 @@ input[type="checkbox"]:checked.toggle:after {
 /* DISPLAY */
 .display {
   width: 100%;
-  flex: 0 0 10%;
+  flex: 0 0 15%;
   color: var(--dark-gray);
   display: flex;
   align-items: center;
@@ -285,7 +285,7 @@ input[type="checkbox"]:checked.toggle:after {
 /* RESTART */
 .restart {
   width: 100%;
-  flex: 0 0 20%;
+  flex: 0 0 15%;
   display: grid;
   place-items: center;
 }
@@ -298,7 +298,7 @@ input[type="checkbox"]:checked.toggle:after {
 
 .btn-restart {
   width: 50%;
-  height: 35%;
+  height: 38%;
   font-size: 1.6rem;
   color: var(--dark-gray);
   font-weight: 600;
@@ -310,7 +310,7 @@ input[type="checkbox"]:checked.toggle:after {
 }
 
 .btn-restart:active {
-  transform: scale(0.9);
+  transform: translateY(0.4rem) scale(0.98);
 }
 
 @media (max-width: 54em) {

@@ -1,6 +1,7 @@
 import { CheckWinner } from "./src/js/checkWinner.js";
 import { BackgroundWinner } from "./src/js/bgWinner.js";
 import { RandomPlayer } from "./src/js/dummyPlayer.js";
+import { disableClickedCell, getCellPosition } from "./src/js/utils.js";
 
 // Players
 const players = document.querySelectorAll(".player");
@@ -15,11 +16,12 @@ const overlay = document.querySelector(".overlay");
 // Mode
 const pvrMode = document.querySelector(".toggle");
 
-const disableClickedCell = allCells => {
-  allCells.forEach(cell => {
-    if (!cell.disabled) cell.disabled = true;
-  });
-};
+let tags = ["x", "o", "x", "o", "x", "o", "x", "o", "x"];
+let matrix = [
+  [null, null, null],
+  [null, null, null],
+  [null, null, null],
+];
 
 const clearGrid = () => {
   cells.forEach(cell => {
@@ -45,38 +47,31 @@ const clearGrid = () => {
   // remove background winner class
 };
 
-let tags = ["x", "o", "x", "o", "x", "o", "x", "o", "x"];
-let matrix = [
-  [null, null, null],
-  [null, null, null],
-  [null, null, null],
-];
-
 let player1Socore = 0;
 let player2Socore = 0;
 
-const switchMarkup = e => {
+const playGame = e => {
   const cell = e.target;
-  // TODO: criar funcao getCellPosition
-  const cellPosition = cell.classList[1]
-    .slice(4, 7)
-    .split("x")
-    .map(idx => +idx);
-
+  const cellPosition = getCellPosition(cell);
   const tag = tags.shift();
   // fill up the matrix
   matrix[cellPosition[0]].splice(cellPosition[1], 1, tag);
   cell.innerText = tag === "x" ? "X" : "O";
+  let winnerObj = new CheckWinner(matrix).whoWon();
+  // disable clicked cell
+  cell.disabled = true;
 
   const pvrModeIsChecked = pvrMode.checked;
-
+  // call randon player class
   const randomPlayer = new RandomPlayer(matrix);
   const randPosition = randomPlayer.getRandomPosition();
 
   if (pvrModeIsChecked && randPosition) {
     // fill up the matrix
-
     matrix[randPosition[0]].splice(randPosition[1], 1, tags.shift());
+
+    winnerObj = new CheckWinner(matrix).whoWon();
+
     player1.classList.toggle("bb-teal");
     player2.classList.toggle("bb-teal");
 
@@ -89,11 +84,8 @@ const switchMarkup = e => {
     }, 500);
   }
 
-  // disable clicked cell
-  cell.disabled = true;
-
   // check for winner or draw
-  const winnerObj = new CheckWinner(matrix).whoWon();
+
   const winner = winnerObj.winner;
   const draw = winnerObj.draw;
 
@@ -146,7 +138,7 @@ players.forEach(player =>
   })
 );
 
-cells.forEach(cell => cell.addEventListener("click", switchMarkup));
+cells.forEach(cell => cell.addEventListener("click", playGame));
 
 btn.addEventListener("click", () => {
   clearGrid();
